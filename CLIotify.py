@@ -1,3 +1,6 @@
+"""
+Author: zxcv@csh/asg7201
+"""
 import os
 import pygame
 import random
