@@ -1,6 +1,8 @@
 """
 Author: zxcv@csh/asg7201
-TM: expand the library
+Description: CLI-based Music player using Python3, PyGame, Random, OS
+PS: Don't mind some of the the crappy code. 
+TM: expand the music library and add an option to create playlists.
 """
 import os
 import pygame
