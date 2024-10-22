@@ -16,7 +16,7 @@ class MusicPlayer:
         self.music_library = {
             #Enter your songs here:
             #Example:
-            #'1': r"C:\Users\usr\Downloads\Daft Punk - Alive 1997 Official [Full Album].mp3",
+            '1': r"C:\Users\arnav\Downloads\Daft Punk - Alive 1997 Official [Full Album].mp3",
             
         }
 
@@ -117,7 +117,7 @@ class MusicPlayer:
 
     def run(self):
         try:
-            print(colored(pyfiglet.figlet_format("CLIotify"),color = "green"))
+            print(colored(pyfiglet.figlet_format("CLIotify", font = "roman"),color = "green"))
             while True:
                 print(colored("\nOptions: [l]ist songs, [p]lay, [pause/resume], [s]top, [n]ext, [b]ack, [shuffle], [v]olume, [f]forward, [r]everse, [q]uit",color = "green"))
                 choice = input(colored("Choose an option: ",color = "green")).strip().lower()
