@@ -15,14 +15,15 @@ class MusicPlayer:
         pygame.mixer.init()
         self.music_library = {
             #Enter your songs here:
-            #Example:
             '1': r"C:\Users\arnav\Downloads\Daft Punk - Alive 1997 Official [Full Album].mp3",
+            '2': r"C:\Users\arnav\Downloads\Daft Punk - Essential Selection Special Edition [Hotmix Live @ BBC Radio].mp3",
+            '3': r"C:\Users\arnav\Downloads\Daft Punk  - Alive 1997 Daftendirektour [Full Mix].mp3",
+            '4': r"C:\Users\arnav\Downloads\Daft Punk - Human After All [Full Album].mp3",
+            '5': r"C:\Users\arnav\Downloads\Daft Punk - Random Access Memories [Full Album].mp3"
             
         }
 
-        """print("Music Library Loaded:")
-        for key, song in self.music_library.items():
-            print(key,": ",os.path.basename(song))"""
+ 
 
         self.current_song = None
         self.is_playing = False
@@ -48,18 +49,18 @@ class MusicPlayer:
                 self.is_playing = True
                 self.is_paused = False
             except Exception as e:
-                print(colored("Error loading song:", {e},color = "green"))
+                print(colored("Error loading song: " + str(e), color="green"))
         else:
-            print(colored("Song not found!"),color = "green")
+            print(colored("Song not found!",color = "green"))
 
     def pause_song(self):
         if self.is_playing and not self.is_paused:
             pygame.mixer.music.pause()
-            print(colored("Paused: ",os.path.basename(self.current_song),color = "green"))
+            print(colored("Paused: " + os.path.basename(self.current_song),color = "green"))
             self.is_paused = True
         elif self.is_paused:
             pygame.mixer.music.unpause()
-            print(colored("Resumed: ", os.path.basename(self.current_song),color = "green"))
+            print(colored("Resumed: " + os.path.basename(self.current_song),color = "green"))
             self.is_paused = False
         else:
             print(colored("No song is currently playing.",color = "green"))
@@ -67,7 +68,7 @@ class MusicPlayer:
     def stop_song(self):
         if self.is_playing:
             pygame.mixer.music.stop()
-            print(colored("Stopped: ",os.path.basename(self.current_song),color = "green"))
+            print(colored("Stopped: "+ os.path.basename(self.current_song),color = "green"))
             self.is_playing = False
             self.is_paused = False
         else:
@@ -92,16 +93,17 @@ class MusicPlayer:
     def shuffle_songs(self):
         keys = list(self.music_library.keys())
         random.shuffle(keys)
-        print(colored("Songs shuffled. Now playing:"),color = "green")
+        print(colored("Songs shuffled. Now playing:",color = "green"))
         self.play_song(keys[0])
 
     def set_volume(self, volume):
-        if 0 <= volume <= 1:
+        if 0 <= volume <= 100:
             self.volume = volume
             pygame.mixer.music.set_volume(self.volume)
-            print(colored("Volume set to ", int(volume * 100),color = "green"))
+            print(colored(f"Volume set to {int(volume)}", color = "green"))
+
         else:
-            print(colored("Volume must be between 0.0 and 1.0.",color = "green"))
+            print(colored("Volume must be between 00.0 and 100.0.",color = "green"))
 
     def seek_song(self, seconds):
         if self.is_playing:
@@ -110,16 +112,41 @@ class MusicPlayer:
 
             # Ensure new position is non-negative
             new_position = max(0, new_position)
-            print(colored(f"Seeking to {new_position:.1f} seconds.",color = "green"))
+            print(colored(f"Forwarding/Reversing to 10 seconds.",color = "green"))
             pygame.mixer.music.play(0, new_position)
         else:
             print(colored("No song is currently playing.",color = "green"))
 
     def run(self):
         try:
-            print(colored(pyfiglet.figlet_format("CLIotify", font = "roman"),color = "green"))
+            print(colored(("CLIotify - root@zxcv\n"),color = "green"))
+            ascii ="""⠀⠀⠀⠀⠀⠀⠀⠀⣾⣛⡿⡿⢽⣶⣤⣀⣀⣀⣀⣀⣀⣠⣴⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢠⣿⢬⡭⢭⣭⣽⣗⡋⠈⠉⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡞⠁⣂⡠⠾⢛⣛⣀⣀⠀⠀⠙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣟⠛⠃⡀⣀⡉⠀⠄⠄⠈⠉⠑⠢⣄⡉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠁⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠈⠲⣍⣿⣿⣿⣿⣿⣿⣿⡉⠛⢿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⢿⣿⣖⠿⣯⢆⠀⠀⢁⠞⠉⠙⠻⠿⣿⣿⣿⣿⣦⣀⣩⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣤⡄⠀⠀⠀⢀⡴⠛⢓⡜⢿⣿⣆⢀⢿⠀⠀⢻⣄⡀⠀⠀⠀⢒⣛⣫⣿⡟⠻⢿⠿⣾⡻⣿⡆⠀⠀⠀⠀⠀⠀⠀
+⢀⡀⢤⣤⢾⣿⣷⠄⢀⡠⠈⣄⠤⠀⠛⢾⣿⣿⣾⡎⠀⠀⠀⠈⠛⠒⠀⠀⠀⠀⠀⢈⣑⡒⠤⠄⣀⣈⣭⠗⠀⠀⠀⠀⠀⠀⠀
+⡏⠈⠉⠉⣿⣿⣿⠍⠹⣿⡄⠉⠻⢶⣌⠀⠻⣿⣿⣿⣷⣶⣴⣾⣿⣿⣿⣿⣿⣿⣶⣶⣶⣶⣶⣦⣄⣒⣊⠀⠀⠀⠀⠀⠀⠀⠀
+⠹⡦⡁⠀⠸⡟⣿⣤⢬⢿⠀⠀⠀⠀⠉⡷⣄⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣿⣶⣤⣤⣀⠀⠀
+⠀⠙⢾⡴⠄⡀⢸⣿⡏⠁⠀⠀⠀⠀⠀⠈⠪⡓⢤⡈⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣷⣿⣟⢵⣆⣈⣍⣿⣿⣿⣿⣷⡄
+⠀⠀⠀⢷⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠈⠂⢌⡓⠢⢤⣉⠉⠛⠻⢿⣿⣿⣿⣿⣿⡿⠿⣿⣿⣿⠿⠛⠛⠛⠛⢛⣨⣿⡗
+⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠲⠤⠍⣒⡂⠀⢼⡉⠛⠁⠀⠀⠀⣠⠟⠻⠙⠉⠀⠁⣉⣁⡠⠔⠀
+⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠒⡇⠀⠀⠀⠀⠈⢀⡠⠔⠒⠀⠉⠉⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢹⡘⢿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⡿⣕⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⠤⠄⠰⠤⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢳⡎⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣺⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢻⣿⣾⣿⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⡶⠏⠉⠻⢿⣿⣿⣿⣿⣿⡷⠆⠙⠿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⣄⠀⠀⠀⠈⣛⣿⡿⠟⢿⣷⣮⣸⡐⠛⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠙⠯⢒⣲⠄⠀⠀⠀⢄⣠⠀⠈⠿⣿⡀⠀⢻⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠐⠲⢌⣓⠤⣀⠀⠀⠀⠈⢳⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⠂⠭⠝⣒⠻⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀      
+               """
+
+            print(colored(ascii,color = "green"))
             while True:
-                print(colored("\nOptions: [l]ist songs, [p]lay, [pause/resume], [s]top, [n]ext, [b]ack, [shuffle], [v]olume, [f]forward, [r]everse, [q]uit",color = "green"))
+                print(colored("""\nOptions: [l]ist songs, [p]lay, [pause/resume], [s]top, [n]ext, [b]ack\n[shuffle], [v]olume, [f]forward, [r]everse, [q]uit""",color = "green"))
                 choice = input(colored("Choose an option: ",color = "green")).strip().lower()
 
                 if choice == 'l':
@@ -138,7 +165,7 @@ class MusicPlayer:
                 elif choice == 'shuffle':
                     self.shuffle_songs()
                 elif choice == 'v':
-                    volume_level = float(input(colored("Enter volume level (0.0 to 1.0): ",color = "green")))
+                    volume_level = float(input(colored("Enter volume level (00.0 to 100.0): ",color = "green")))
                     self.set_volume(volume_level)
                 elif choice == 'f':
                     self.seek_song(10) 
@@ -153,7 +180,7 @@ class MusicPlayer:
             print(colored("\nExiting the music player.",color = "green"))
             pygame.mixer.music.stop()
         finally:
-            pygame.mixer.quit()  # Ensure pygame quits properly
+            pygame.mixer.quit()
 
 if __name__ == "__main__":
     player = MusicPlayer()
