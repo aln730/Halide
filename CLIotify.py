@@ -100,10 +100,9 @@ class MusicPlayer:
         print(colored((ascii),color = "magenta"))
         folder_path = input("Enter the folder: ")
         self.read_songs_from_folder(folder_path)
-        print(colored("File Initialized", color="magenta"))
+        print(colored("Fplder Initialized", color="magenta"))
         while True:
-            print(colored("""\nOptions: [l]ist songs, [p]lay, [pause/resume], [s]top, [n]ext, [b]ack
-shuffle, [f]orward, [r]everse, [q]uit""", color="magenta"))
+            print(colored("""\nOptions: [l]ist songs, [p]lay, [pause/resume], [s]top, [n]ext\n[b]ack shuffle, [f]orward, [r]everse, [q]uit""", color="magenta"))
             choice = input(colored("Choose an option: ", color="magenta")).lower()
             if choice == 'l':
                 self.list_songs()
