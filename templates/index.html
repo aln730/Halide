@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIotify Music Player</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: black;
+            color: green;
+            padding: 20px;
+        }
+        button {
+            background-color: black;
+            color: green;
+            border: 2px solid green;
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: green;
+            color: black;
+        }
+        .song-list {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CLIotify Music Player</h1>
+    <h2>Available Songs:</h2>
+    <div class="song-list">
+        {% for key, song in songs.items() %}
+            <p>{{ key }}: {{ song }}
+                <form action="/play" method="post" style="display:inline;">
+                    <input type="hidden" name="song_key" value="{{ key }}">
+                    <button type="submit">Play</button>
+                </form>
+            </p>
+        {% endfor %}
+    </div>
+    <h2>Currently Playing: {{ current_song or "None" }}</h2>
+    <form action="/pause" method="post" style="display:inline;">
+        <button type="submit">Pause/Resume</button>
+    </form>
+    <form action="/stop" method="post" style="display:inline;">
+        <button type="submit">Stop</button>
+    </form>
+</body>
+</html>
