@@ -60,7 +60,7 @@ class MusicPlayer:
         """Pauses the currently playing song."""
         if pygame.mixer.music.get_busy():
             pygame.mixer.music.pause()
-            console.print("[magenta]Paused[/magenta]", justify="center")
+            console.print("[cyan]Paused[/cyan]", justify="center")
         else:
             console.print("[bold red]No song is currently playing.[/bold red]", justify="center")
 
@@ -68,7 +68,7 @@ class MusicPlayer:
         """Resumes the song if it's paused."""
         if not pygame.mixer.music.get_busy():
             pygame.mixer.music.unpause()
-            console.print("[magenta]Resumed[/magenta]", justify="center")
+            console.print("[cyan]Resumed[/cyan]", justify="center")
         else:
             console.print("[bold red]No song is paused.[/bold red]", justify="center")
 
@@ -135,17 +135,17 @@ class MusicPlayer:
     def display_ascii_art(self):
         """Displays ASCII art as a fun welcome message."""
         ascii_art = """
- ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░▒▓████████▓▒░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░  
-░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
- ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
+                                     ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓██████▓▒░▒▓████████▓▒░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+                                    ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+                                    ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
+                                    ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓██████▓▒░  ░▒▓██████▓▒░  
+                                    ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
+                                    ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
+                                     ░▒▓██████▓▒░░▒▓████████▓▒░▒▓█▓▒░░▒▓██████▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░▒▓█▓▒░         ░▒▓█▓▒░     
                                                                                            
                                                                                            
 """
-        console.print(ascii_art, style="bold magenta", justify="center")
+        console.print(ascii_art, style="bold magenta",justify="full")
 
     def add_song(self, song_path):
         """Adds a new song to the playlist from the specified file path."""
@@ -190,7 +190,7 @@ class MusicPlayer:
             if choice in ["l"]:
                 self.list_songs()
             elif choice in ["search"]:
-                search_query = Prompt.ask("Enter the song you want to search: ")
+                search_query = Prompt.ask("Enter the song you want to search")
                 self.search_songs(search_query)
             elif choice in ["p", "play"]:
                 song_index = self.validate_input("Enter the song number to play", cast_type=int)
