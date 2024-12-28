@@ -182,48 +182,44 @@ class MusicPlayer:
         self.display_ascii_art()
         folder_path = Prompt.ask("Enter the folder path to load songs")
         self.read_songs_from_folder(folder_path)
+        commands = {
+            "l": self.list_songs,
+            "search": lambda: self.search_songs(Prompt.ask("Enter the song you want to search")),
+            "p": lambda: self.play_song(self.validate_input("Enter the song number to play", cast_type=int)),
+            "play": lambda: self.play_song(self.validate_input("Enter the song number to play", cast_type=int)),
+            "pause": self.pause_song,
+            "resume": self.resume_song,
+            "s": self.stop_song,
+            "stop": self.stop_song,
+            "n": self.next_song,
+            "next": self.next_song,
+            "b": self.previous_song,
+            "back": self.previous_song,
+            "f": lambda: self.seek_song(self.validate_input("Enter seconds to forward", cast_type=int)),
+            "forward": lambda: self.seek_song(self.validate_input("Enter seconds to forward", cast_type=int)),
+            "r": lambda: self.seek_song(-self.validate_input("Enter seconds to reverse", cast_type=int)),
+            "reverse": lambda: self.seek_song(-self.validate_input("Enter seconds to reverse", cast_type=int)),
+            "shuffle": self.shuffle_songs,
+            "m": self.toggle_mute,
+            "mute": self.toggle_mute,
+            "a": lambda: self.add_song(Prompt.ask("Enter the song path to add")),
+            "add": lambda: self.add_song(Prompt.ask("Enter the song path to add")),
+            "re": lambda: self.remove_song(self.validate_input("Enter the song number to remove", cast_type=int)),
+            "remove": lambda: self.remove_song(self.validate_input("Enter the song number to remove", cast_type=int)),
+            "q": lambda: console.print("[bold green]Exiting the player...[/bold green]", justify="center")
+        }
 
         while True:
-            console.print("[magenta]Options: list songs (l), search songs (search), play (p), pause (pause), resume (resume), stop (s), next (n), back (b), forward (f), reverse (r), shuffle (shuffle), mute (m), unmute (u), add (a), remove (re), quit (q)[/magenta]", justify="center")
-            choice = self.validate_input("Choose an option")
+            choice = Prompt.ask("What do you want to do?").strip().lower()
+            if choice in commands:
+                if choice == "q":
+                    commands[choice]()  
+                    break
+                else:
+                    commands[choice]()
+            else:
+                console.print("[red]Invalid option! Try again.[/red]")
 
-            if choice in ["l"]:
-                self.list_songs()
-            elif choice in ["search"]:
-                search_query = Prompt.ask("Enter the song you want to search")
-                self.search_songs(search_query)
-            elif choice in ["p", "play"]:
-                song_index = self.validate_input("Enter the song number to play", cast_type=int)
-                self.play_song(song_index)
-            elif choice in ["pause"]:
-                self.pause_song()
-            elif choice in ["resume"]:
-                self.resume_song()
-            elif choice in ["s", "stop"]:
-                self.stop_song()
-            elif choice in ["n", "next"]:
-                self.next_song()
-            elif choice in ["b", "back"]:
-                self.previous_song()
-            elif choice in ["f", "forward"]:
-                seconds = self.validate_input("Enter the number of seconds to forward", cast_type=int)
-                self.seek_song(seconds)
-            elif choice in ["r", "reverse"]:
-                seconds = self.validate_input("Enter the number of seconds to reverse", cast_type=int)
-                self.seek_song(seconds)
-            elif choice in ["shuffle"]:
-                self.shuffle_songs()
-            elif choice in ["m", "mute"]:
-                self.toggle_mute()
-            elif choice in ["a", "add"]:
-                song_path = Prompt.ask("Enter the full path of the song to add")
-                self.add_song(song_path)
-            elif choice in ["re", "remove"]:
-                song_index = self.validate_input("Enter the song number to remove", cast_type=int)
-                self.remove_song(song_index)
-            elif choice in ["q"]:
-                console.print("[bold green]Exiting the music player...\n Logo created using the BlurVision font from the ASCII Art Generator at patorjk.com.[/bold green]", justify="center")
-                break
 
 if __name__ == "__main__":
     player = MusicPlayer()
