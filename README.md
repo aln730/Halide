@@ -26,3 +26,6 @@ Ensure you have the following installed on your system:
 - `pygame` library
 - `rich` library
 
+  ![image](https://github.com/user-attachments/assets/d9d523f6-0cae-4401-b8f5-f1be0db3520b)
+
+
